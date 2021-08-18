@@ -24,6 +24,11 @@ class Video(Resource):
         video_dict = video_put_args.parse_args()
         videos[video_id] = video_dict
         return videos[video_id], 201
+    
+    def delete(self, video_id):
+        abort_if_video_id_doesnt_exist(video_id)
+        del videos[video_id]
+        return '', 204
         
 api.add_resource(Video, "/video/<int:video_id>")
 
